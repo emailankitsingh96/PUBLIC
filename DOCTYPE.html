@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Small Question</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+overflow:hidden;
+}
+
+.container{
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+width:85%;
+max-width:320px;
+}
+
+h1{
+color:#ff4d6d;
+margin-bottom:10px;
+}
+
+p{
+font-size:16px;
+}
+
+button{
+padding:14px 25px;
+margin:10px;
+border:none;
+border-radius:25px;
+font-size:18px;
+cursor:pointer;
+transition:0.2s;
+}
+
+#yes{
+background:#ff4d6d;
+color:white;
+}
+
+#no{
+background:#e0e0e0;
+position:relative;
+}
+
+#message{
+margin-top:15px;
+font-weight:bold;
+color:#ff4d6d;
+}
+
+/* Floating hearts */
+
+.heart{
+position:absolute;
+bottom:-20px;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+opacity:1;
+}
+100%{
+transform:translateY(-100vh);
+opacity:0;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Hi 🙂</h1>
+
+<p>I wanted to ask you something...</p>
+
+<p><b>Kinshu, Missing me already?</b></p>
+
+<button id="yes">Yes</button> <button id="no">No</button>
+
+<div id="message"></div>
+
+</div>
+
+<!-- Background Music -->
+
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/32GZ3suxRn4?autoplay=1&loop=1&playlist=32GZ3suxRn4"
+allow="autoplay">
+</iframe>
+
+<script>
+
+const yes=document.getElementById("yes")
+const no=document.getElementById("no")
+const message=document.getElementById("message")
+
+yes.onclick=function(){
+
+confetti({
+particleCount:200,
+spread:100,
+origin:{y:0.6}
+})
+
+message.innerHTML="I Knew It. Call kerna mujhe"
+
+}
+
+/* No button escape */
+
+function moveButton(){
+
+const x=Math.random()*200-100
+const y=Math.random()*150-75
+
+no.style.transform=`translate(${x}px,${y}px)`
+}
+
+no.addEventListener("mouseover",moveButton)
+no.addEventListener("touchstart",moveButton)
+
+/* Floating hearts */
+
+function createHeart(){
+
+const heart=document.createElement("div")
+heart.classList.add("heart")
+heart.innerHTML="♥"
+
+heart.style.left=Math.random()*100+"%"
+heart.style.fontSize=(Math.random()*20+10)+"px"
+heart.style.animationDuration=(Math.random()*3+3)+"s"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{heart.remove()},6000)
+
+}
+
+setInterval(createHeart,500)
+
+</script>
+
+</body>
+
+</html>
